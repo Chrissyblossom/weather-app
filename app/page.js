@@ -2,17 +2,17 @@
 import { useState } from 'react';
 
 export default function weather() {
-  const [isCelsius, setIsCelsius] = useState(true);
+  const [isCelsius, setIsCelsius] = useState(true); // track whether temperature is shown in C (true) or F (false).
 
   //function to convert temperature from Celsius to Fahrenheit
-  const convertTemp = (tempC) => {
+  const convertTemp = (tempC) => { //
     return isCelsius ? tempC : Math.round((tempC * 9) / 5 + 32); // If isCelsius is true return temperature in Celsius
   };
 
   // array to store forecast data 
   const forecastData = [
     { day: "Mon", date: "9/7", icon: "/rain.png", tempC: 22 },
-    { day: "Tue", date: "9/8", icon: "/sun.png", tempC: 25, active: true },
+    { day: "Tue", date: "9/8", icon: "/sun.png", tempC: 25, active: true }, //Mark as highlighted forecast
     { day: "Wed", date: "9/9", icon: "/cloud.png", tempC: 20 },
   ];
 
@@ -88,7 +88,7 @@ export default function weather() {
             className={`px-4 py-1 rounded-full transition ${
               !isCelsius ? 'bg-purple-500 text-white' : 'text-purple-700'
             }`}
-            onClick={() => setIsCelsius(false)}
+            onClick={() => setIsCelsius(false)} //set to Celsius 
           >
             °F
           </button>

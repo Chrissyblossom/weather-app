@@ -80,7 +80,7 @@ export default function weather() {
             className={`px-4 py-1 rounded-full transition ${
               isCelsius ? 'bg-purple-500 text-white' : 'text-purple-700'
             }`}
-            onClick={() => setIsCelsius(true)}
+            onClick={() => setIsCelsius(true)}  //set to Celsius
           >
             °C
           </button>
@@ -88,7 +88,7 @@ export default function weather() {
             className={`px-4 py-1 rounded-full transition ${
               !isCelsius ? 'bg-purple-500 text-white' : 'text-purple-700'
             }`}
-            onClick={() => setIsCelsius(false)} //set to Celsius 
+            onClick={() => setIsCelsius(false)}  
           >
             °F
           </button>

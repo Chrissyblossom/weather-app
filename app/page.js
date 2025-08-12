@@ -18,24 +18,29 @@ export default function Weather() {
   const [weatherData, setWeatherData] = useState(null); // store weather data
 
   useEffect(() => {
+    // Define and immediately invoke an async function to fetch weather data
     (async () => {
       const data = await getWeatherData();
-      if (data) setWeatherData(data);
+      if (data) {
+        setWeatherData(data);
+      }
     })();
-  }, []);
+  }, []); //Run only once on component 
 
 /**
- * Fetches weather data from OpenWeatherMap API.
+ * Fetches weather data from API.
  * @returns {object|null} - Weather data or null on error.
  */
 
 async function getWeatherData() {
   const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_APP_ID;
-  const url = `${API_URL}&appid=${apiKey}`;
+  const url = `${API_URL}&appid=${apiKey}`; 
 
 
     try {
       const response = await fetch(url);
+
+      //check if the response is successful
       if (!response.ok) {
         console.error('ERROR');
         return null;

@@ -3,6 +3,15 @@ import { useState, useEffect } from 'react';
 
 const API_URL = 'https://api.openweathermap.org/data/2.5/weather?q=accra&units=metric';
 
+/**
+ * Converts temperature from Celsius to Fahrenheit if needed.
+ * @param {number} tempC - Temperature in Celsius.
+ * @param {boolean} isCelsius - Flag to determine conversion.
+ * @returns {number} - Converted temperature.
+ */
+function convertTemp  (tempC,isCelsius) {
+    return isCelsius ? Math.round(tempC) : Math.round((tempC * 9) / 5 + 32); // If isCelsius is true return temperature in Celsius
+  };
 
 export default function Weather() {
   const [isCelsius, setIsCelsius] = useState(true); // track whether temperature is shown in C (true) or F (false)
@@ -21,8 +30,12 @@ export default function Weather() {
  */
 
 async function getWeatherData() {
+  const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_APP_ID;
+  const url = `${API_URL}&appid=${apiKey}`;
+
+
     try {
-      const response = await fetch(`${API_URL}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_APP_ID}`);
+      const response = await fetch(url);
       if (!response.ok) {
         console.error('ERROR');
         return null;
@@ -30,19 +43,9 @@ async function getWeatherData() {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.log('Error fetching data', error);
+      console.error('Error fetching data', error);
       return null;
     }
-  };
-
-/**
- * Converts temperature from Celsius to Fahrenheit if needed.
- * @param {number} tempC - Temperature in Celsius.
- * @param {boolean} isCelsius - Flag to determine conversion.
- * @returns {number} - Converted temperature.
- */
-  function convertTemp  (tempC,isCelsius) {
-    return isCelsius ? Math.round(tempC) : Math.round((tempC * 9) / 5 + 32); // If isCelsius is true return temperature in Celsius
   };
 
   if (!weatherData) {
@@ -198,6 +201,4 @@ function UnitConversion({ isCelsius, setIsCelsius }) {
       </div>
   );
 }
-   
-
 
